@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './Topbar.css';
+import logo from '../assets/logo.svg';
+import '../styles/Topbar.css';
 
 export function Topbar() {
   return (
