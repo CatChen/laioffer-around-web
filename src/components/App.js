@@ -1,13 +1,13 @@
 import React from 'react';
 import { Topbar } from './Topbar';
-import { Register } from './Register';
+import { Main } from './Main';
 import '../styles/App.css';
 
 function App() {
   return (
     <div className="App">
       <Topbar />
-      <Register />
+      <Main />
     </div>
   );
 }
