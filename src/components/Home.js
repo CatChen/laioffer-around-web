@@ -1,10 +1,54 @@
 import React from 'react';
 import { Tabs, Button } from 'antd';
+import { GEOLOCATION_OPTIONS } from '../constants';
 import '../styles/Home.css';
 
 const { TabPane } = Tabs;
 
 export class Home extends React.Component {
+  state = {
+    loadingGeolocation: false,
+    errorMessage: null,
+  }
+
+  getGeolocation() {
+    this.setState({
+      loadingGeolocation: true,
+      errorMessage: null,
+    });
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        this.onGeolocationSuccess,
+        this.onGeolocationFailure,
+        GEOLOCATION_OPTIONS,
+      );
+    } else {
+      this.setState({
+        loadingGeolocation: false,
+        errorMessage: 'Your browser does not support geolocation.',
+      });
+    }
+  }
+
+  onGeolocationSuccess = (position) => {
+    this.setState({
+      loadingGeolocation: false,
+      errorMessage: null,
+    })
+    console.log(position);
+  }
+
+  onGeolocationFailure = () => {
+    this.setState({
+      loadingGeolocation: false,
+      errorMessage: 'Failed to load geolocation.',
+    })
+  }
+
+  componentDidMount() {
+    this.getGeolocation();
+  }
+
   render() {
     const operations = <Button>Create New Post</Button>;
     return (
