@@ -1,5 +1,6 @@
 import React from 'react';
-import { Tabs, Button } from 'antd';
+import { Tabs, Button, Spin } from 'antd';
+import { Gallery } from './Gallery';
 import {
   GEOLOCATION_OPTIONS,
   POSITION_KEY,
@@ -89,6 +90,31 @@ export class Home extends React.Component {
     });
   }
 
+  getImagePosts() {
+    if (this.state.errorMessage) {
+      return <div>{this.state.errorMessage}</div>
+    } else if(this.state.loadingGeolocation) {
+      return <Spin tip="Loading geolocation..."/>
+    } else if (this.state.loadingPosts) {
+      return <Spin tip="Loading posts..." />
+    } else if (this.state.posts.length > 0) {
+      const images = this.state.posts.map((post) => {
+        return {
+          user: post.user,
+          src: post.url,
+          thumbnail: post.url,
+          caption: post.message,
+          thumbnailWidth: 400,
+          thumbnailHeight: 300,
+        }
+      });
+
+      return (<Gallery images={images}/>);
+    } else {
+      return 'No nearby posts.';
+    }
+  }
+
   componentDidMount() {
     this.getGeolocation();
   }
@@ -97,8 +123,8 @@ export class Home extends React.Component {
     const operations = <Button>Create New Post</Button>;
     return (
       <Tabs tabBarExtraContent={operations} className="main-tabs">
-        <TabPane tab="Tab 1" key="1">
-          Content of tab 1
+        <TabPane tab="Image Posts" key="1">
+          {this.getImagePosts()}
         </TabPane>
         <TabPane tab="Tab 2" key="2">
           Content of tab 2
