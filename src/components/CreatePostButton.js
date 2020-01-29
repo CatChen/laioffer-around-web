@@ -51,6 +51,9 @@ export class CreatePostButton extends React.Component {
               visible: false,
               confirmLoading: false,
             });
+            if (this.props.onSuccess) {
+              this.props.onSuccess();
+            }
           } else {
             message.error('Create post failed.');
             this.setState({

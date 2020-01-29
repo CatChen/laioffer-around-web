@@ -58,10 +58,10 @@ export class Home extends React.Component {
     })
   }
 
-  loadNearbyPost(
+  loadNearbyPost = (
     position = JSON.parse(localStorage.getItem(POSITION_KEY)),
     range = 20,
-  ) {
+  ) => {
     this.setState({
       loadingPosts: true,
       errorMessage: null,
@@ -121,7 +121,7 @@ export class Home extends React.Component {
   }
 
   render() {
-    const operations = <CreatePostButton />;
+    const operations = <CreatePostButton onSuccess={this.loadNearbyPost} />;
     return (
       <Tabs tabBarExtraContent={operations} className="main-tabs">
         <TabPane tab="Image Posts" key="1">
