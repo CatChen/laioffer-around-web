@@ -167,6 +167,7 @@ export class Home extends React.Component {
             containerElement={<div style={{ height: `600px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             posts={this.state.posts}
+            onChange={this.loadNearbyPost}
           />
         </TabPane>
       </Tabs>
