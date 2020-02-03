@@ -3,6 +3,7 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
+import '../styles/AroundMarker.css';
 
 export class AroundMarker extends React.Component {
   state = {
@@ -16,18 +17,22 @@ export class AroundMarker extends React.Component {
   }
 
   render() {
-    const { location } = this.props.post;
+    const { location, user, message, url } = this.props.post;
 
     return (
       <Marker
         position={{ lat: location.lat, lng: location.lon }}
-        onClick={this.onToggleOpen}
+        onMouseOver={this.onToggleOpen}
+        onMouseOut={this.onToggleOpen}
       >
         {(
           this.state.isOpen ?
             (
               <InfoWindow onCloseClick={this.onToggleOpen}>
-                <div>InfoWindow</div>
+                <div>
+                  <img src={url} alt={message} class="around-marker-image" />
+                  <div>{`${user}: ${message}`}</div>
+                </div>
               </InfoWindow>
             ) :
             null
