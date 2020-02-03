@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs, Spin, Row, Col } from 'antd';
 import { CreatePostButton } from './CreatePostButton';
 import { Gallery } from './Gallery';
+import { AroundMap } from './AroundMap';
 import {
   GEOLOCATION_OPTIONS,
   POSITION_KEY,
@@ -159,8 +160,13 @@ export class Home extends React.Component {
         <TabPane tab="Video Posts" key="2">
           {this.getPosts(POST_TYPE_VIDEO)}
         </TabPane>
-        <TabPane tab="Tab 3" key="3">
-          Content of tab 3
+        <TabPane tab="Map" key="3">
+          <AroundMap
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3CEh9DXuyjozqptVB5LA-dN7MxWWkr9s&v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `600px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            />
         </TabPane>
       </Tabs>
     );
